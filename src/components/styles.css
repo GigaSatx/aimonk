@@ -1,0 +1,30 @@
+.root {
+  padding-left: 15px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+}
+.left-head {
+  display: flex;
+  align-items: center;
+}
+.open-btn {
+  height: 2rem;
+  width: 4rem;
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.add-child-btn {
+  border: 1px solid darkgrey;
+  border-radius: 5px;
+  height: 2rem;
+  width: 5rem;
+}
+.data-cls {
+  display: flex;
+  margin-left: 15px;
+}
