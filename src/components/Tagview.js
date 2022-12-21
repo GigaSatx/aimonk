@@ -1,4 +1,5 @@
 import { useState } from "react";
+import useChild from "../hooks/useChild";
 import Tag from "./Tag";
 
 export default function Tagview() {
@@ -16,19 +17,16 @@ export default function Tagview() {
     ],
   };
 
-  const [data, setData] = useState(Array(tree));
-  const addChild = (node) => {
-    console.log("worling");
-    setData(() => {
-      return Array(node).concat([{ name: "Untitled", data: "new Data" }]);
-    });
+  const [data, setData] = useState(tree);
+  const { insertNode } = useChild();
+  const handleInsertNode = (name, item) => {
+    const finalData = insertNode(data, name, item);
+    setData(finalData);
   };
 
   return (
     <div>
-      {data.map((tag, index) => (
-        <Tag key={index} tag={tag} addChild={addChild} />
-      ))}
+      <Tag tag={data} handleInsertNode={handleInsertNode} />
       {console.log(data)}
     </div>
   );

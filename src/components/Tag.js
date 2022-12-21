@@ -1,20 +1,34 @@
 import { useEffect, useState } from "react";
+import useChild from "../hooks/useChild";
 import "./styles.css";
 
-export default function Tag({ tag, addChild }) {
+export default function Tag({ tag, handleInsertNode }) {
   const [openTag, setOpenTag] = useState(true);
-  const [node, setNode] = useState(tag);
+  //   const [nodeObj, setNodeObj] = useState(tag);
 
-  const handleNode = (node) => {
-    console.log(node, "node");
-    setNode(() => {
-      const copy = { ...node };
-      delete copy.data;
-      return Array(node).concat([
-        { ...copy, children: [{ name: "Untitled", data: "new Data" }] },
-      ]);
-    });
-  };
+  //   const handleNode = (node) => {
+  //     console.log(node, "node");
+  //     const copy = { ...node };
+  //     delete copy.data;
+  //     setNodeObj(() => {
+  //       if (copy.children) {
+  //         return copy.children.concat({
+  //           name: "Untitled",
+  //           data: "new Data",
+  //         });
+  //       } else {
+  //         return {
+  //           ...copy,
+  //           children: [
+  //             {
+  //               name: "Untitled",
+  //               data: "new Data",
+  //             },
+  //           ],
+  //         };
+  //       }
+  //     });
+  //   };
 
   const handleChange = () => {};
   return (
@@ -22,10 +36,15 @@ export default function Tag({ tag, addChild }) {
       <div className="root">
         <header className="header">
           <div className="left-head">
-            <button className="open-btn">{openTag ? "v" : ">"}</button>
+            <button className="open-btn" onClick={() => setOpenTag(!openTag)}>
+              {openTag ? ">" : "v"}
+            </button>
             <p>{tag.name}</p>
           </div>
-          <button className="add-child-btn" onClick={() => addChild(node)}>
+          <button
+            className="add-child-btn"
+            onClick={() => handleInsertNode(tag.name, "child name")}
+          >
             Add Child
           </button>
         </header>
@@ -33,12 +52,17 @@ export default function Tag({ tag, addChild }) {
           <span style={{ marginRight: "10px" }}>Data</span>
           <input value={tag.data} onChange={handleChange} />
         </div>
-
-        {tag.children &&
-          tag.children.length > 0 &&
-          tag.children.map((childtag, index) => (
-            <Tag key={index} tag={childtag} addChild={handleNode} />
-          ))}
+        <div style={{ display: openTag ? "none" : "block" }}>
+          {tag.children &&
+            tag.children.length > 0 &&
+            tag.children.map((childtag, index) => (
+              <Tag
+                key={index}
+                tag={childtag}
+                handleInsertNode={handleInsertNode}
+              />
+            ))}
+        </div>
       </div>
     </>
   );
