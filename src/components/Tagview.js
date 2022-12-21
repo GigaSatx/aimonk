@@ -18,16 +18,25 @@ export default function Tagview() {
   };
 
   const [data, setData] = useState(tree);
-  const { insertNode } = useChild();
+  const { insertNode,inputData,inputTagName} = useChild();
   const handleInsertNode = (name, item) => {
     const finalData = insertNode(data, name, item);
     setData(finalData);
   };
 
+  const handleInputData = (name,item) => {
+    const finalData  = inputData(data,name,item)
+    setData(finalData)
+  }
+  const handleTagInputData = (name,item) => {
+    const finalData  = inputTagName(data,name,item)
+    setData(finalData)
+  }
+
   return (
-    <div>
-      <Tag tag={data} handleInsertNode={handleInsertNode} />
-      {console.log(data)}
+    <div style={{marginRight:'2rem'}}>
+      <Tag tag={data} handleInsertNode={handleInsertNode} handleInputData={handleInputData} handleTagInputData={handleTagInputData}/>
+      <div style={{margin:'2rem 2rem 5rem 2rem'}}>{JSON.stringify(data)}</div>
     </div>
   );
 }

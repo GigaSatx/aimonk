@@ -1,11 +1,14 @@
 .root {
-  padding-left: 15px;
+  padding: 15px 0px 15px 25px;
+  border:'1px solid red'
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 5px;
+  background-color: rgb(116, 174, 229);
+  margin-bottom: 5px;
 }
 .left-head {
   display: flex;
@@ -22,9 +25,13 @@
   border: 1px solid darkgrey;
   border-radius: 5px;
   height: 2rem;
-  width: 5rem;
+  width: 8rem;
+  margin: 0 5px;
 }
 .data-cls {
   display: flex;
   margin-left: 15px;
+}
+.tag-body{
+  background-color: aliceblue;
 }
