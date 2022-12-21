@@ -12,24 +12,28 @@ const useChild = () => {
         });
         return tree;
       } else {
-        return {
-          ...copy,
-          children: [
-            {
-              name: "Untitled",
-              data: "new Data",
-            },
-          ],
-        };
+        // return {
+        //   ...copy,
+        //   children: [
+        //     {
+        //       name: "Untitled",
+        //       data: "new Data",
+        //     },
+        //   ],
+        // };
       }
-      tree.children = copy;
-
-      return tree;
     }
     let latestNode = [];
-    latestNode = tree.items.map((ob) => {
-      return insertNode(ob, name, item);
-    });
+    if (tree.children) {
+      latestNode = tree.children.map((ob) => {
+        return insertNode(ob, name, item);
+      });
+    } else {
+      tree.children = [];
+      latestNode = tree.children.map((ob) => {
+        return insertNode(ob, name, item);
+      });
+    }
 
     return { ...tree, children: latestNode };
   };

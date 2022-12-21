@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useChild from "../hooks/useChild";
 import Tag from "./Tag";
 
