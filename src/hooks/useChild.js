@@ -4,17 +4,19 @@ const useChild = () => {
       const copy = { ...tree };
       delete copy.data;
       if (copy.children) {
-        console.log(tree, 'working')
-        return {...copy ,children : copy.children.concat({
-          name: "Untitled",
-          data: item,
-        })};
+        return {
+          ...copy,
+          children: copy.children.concat({
+            name: Math.random().toString(36).substring(2, 7),
+            data: item,
+          }),
+        };
       } else {
         return {
           ...copy,
           children: [
             {
-              name: "Untitled",
+              name: Math.random().toString(36).substring(2, 7),
               data: item,
             },
           ],
@@ -35,11 +37,10 @@ const useChild = () => {
     return { ...tree, children: latestNode };
   };
 
-
   const inputData = (tree, name, item) => {
     if (tree.name === name) {
       if (tree.data) {
-        tree.data = item
+        tree.data = item;
       }
     }
     let latestNode = [];
@@ -58,7 +59,7 @@ const useChild = () => {
   const inputTagName = (tree, name, item) => {
     if (tree.name === name) {
       if (tree.name) {
-        tree.name = item
+        tree.name = item;
       }
     }
     let latestNode = [];

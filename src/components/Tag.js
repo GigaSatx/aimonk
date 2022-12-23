@@ -2,29 +2,34 @@ import { useEffect, useState } from "react";
 import useChild from "../hooks/useChild";
 import "./styles.css";
 
-export default function Tag({ tag, handleInsertNode, handleInputData, handleTagInputData }) {
+export default function Tag({
+  tag,
+  handleInsertNode,
+  handleInputData,
+  handleTagInputData,
+}) {
   const [openTag, setOpenTag] = useState(true);
-  const [inputVal, setInputVal] = useState(tag.data)
-  const [tagName, setTagName] = useState(tag.name)
-  const [tagInputOpen, setTagInputOpen] = useState(false)
+  const [inputVal, setInputVal] = useState(tag.data);
+  const [tagName, setTagName] = useState(tag.name);
+  const [tagInputOpen, setTagInputOpen] = useState(false);
 
   const handleChange = (e) => {
-    setInputVal(e.target.value)
+    setInputVal(e.target.value);
   };
   const handleTagNameChange = (e) => {
-    setTagName(e.target.value)
-  }
+    setTagName(e.target.value);
+  };
   const handleInput = (e) => {
     if (e.keyCode === 13) {
-      handleInputData(tag.name, inputVal)
+      handleInputData(tag.name, inputVal);
     }
-  }
+  };
   const handleTagInput = (e) => {
     if (e.keyCode === 13) {
-      handleTagInputData(tag.name, tagName)
-      setTagInputOpen(false)
+      handleTagInputData(tag.name, tagName);
+      setTagInputOpen(false);
     }
-  }
+  };
   return (
     <>
       <div className="root">
@@ -33,11 +38,18 @@ export default function Tag({ tag, handleInsertNode, handleInputData, handleTagI
             <button className="open-btn" onClick={() => setOpenTag(!openTag)}>
               {openTag ? ">" : "v"}
             </button>
-            {tagInputOpen ?
+            {tagInputOpen ? (
               <p>
-                <input value={tagName} onChange={(e) => handleTagNameChange(e)} onKeyDown={(e) => handleTagInput(e)} autoFocus />
+                <input
+                  value={tagName}
+                  onChange={(e) => handleTagNameChange(e)}
+                  onKeyDown={(e) => handleTagInput(e)}
+                  autoFocus
+                />
               </p>
-              : <p>{tagName}</p>}
+            ) : (
+              <p>{tagName}</p>
+            )}
           </div>
           <div>
             <button
@@ -48,18 +60,24 @@ export default function Tag({ tag, handleInsertNode, handleInputData, handleTagI
             </button>
             <button
               className="add-child-btn"
-              onClick={() => handleInsertNode(tag.name, 'Enter Data')}
+              onClick={() => handleInsertNode(tag.name, "Enter Data")}
             >
               Add Child
             </button>
           </div>
         </header>
         <div className="tag-body">
-          {tag.data &&
+          {tag.data && (
             <div className="data-cls">
               <span style={{ marginRight: "10px" }}>Data</span>
-              <input value={inputVal} onChange={(e) => handleChange(e)} onKeyDown={(e) => handleInput(e)} autoFocus />
-            </div>}
+              <input
+                value={inputVal}
+                onChange={(e) => handleChange(e)}
+                onKeyDown={(e) => handleInput(e)}
+                autoFocus
+              />
+            </div>
+          )}
           <div style={{ display: openTag ? "none" : "block" }}>
             {tag.children &&
               tag.children.length > 0 &&
